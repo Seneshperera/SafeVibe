@@ -1,0 +1,9 @@
+version: weights_v1
+# Relative weights per signal family. Renormalised over the families actually evaluated.
+weights:
+  content: 0.30
+  url: 0.30
+  sender: 0.15
+  domain: 0.10
+  conversation: 0.10
+  image: 0.05

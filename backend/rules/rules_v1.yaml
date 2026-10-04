@@ -1,0 +1,45 @@
+version: rules_v1
+# contribution = how much this single hit adds to the content family score (0..1)
+rules:
+  - id: C-URGENCY-01
+    category: urgency
+    pattern: '\b(urgent(ly)?|immediately|within \d+ (hours?|minutes?)|act now|final notice|last chance|expires? (today|soon)|right away)\b'
+    contribution: 0.25
+    technical: "Urgency/deadline language detected, a common social-engineering pressure technique."
+    plain: "The message tries to rush you into acting quickly."
+  - id: C-FEAR-01
+    category: fear
+    pattern: '\b(suspended|locked|blocked|deactivated|unauthori[sz]ed (access|activity|login)|compromised|legal action|arrest|will be closed)\b'
+    contribution: 0.25
+    technical: "Fear/threat language (account suspension, legal action) detected."
+    plain: "The message tries to scare you with a threat like a blocked account."
+  - id: C-REWARD-01
+    category: reward
+    pattern: '\b(you (have )?won|winner|prize|lottery|congratulations|free gift|claim your (reward|prize)|cash ?back)\b'
+    contribution: 0.25
+    technical: "Reward/prize language detected, often used as bait."
+    plain: "The message promises a prize or reward you did not ask for."
+  - id: C-CRED-01
+    category: credential_request
+    pattern: '\b(password|passcode|otp|one[- ]time (password|code)|pin number|verify your (account|identity)|confirm your (account|details|identity)|login details|security code|cvv|card number)\b'
+    contribution: 0.35
+    technical: "Request for credentials or sensitive verification data detected."
+    plain: "The message asks for passwords, codes or personal details. Real companies rarely ask this by message."
+  - id: C-FIN-01
+    category: financial_pressure
+    pattern: '\b(pay(ment)? (a )?(small )?(fee|fine)|processing fee|customs fee|delivery fee|redelivery fee|transfer (the )?(money|funds)|wire transfer|gift ?cards?|bitcoin|crypto(currency)?|deposit)\b'
+    contribution: 0.30
+    technical: "Financial pressure / payment demand detected."
+    plain: "The message asks you to send money or pay a fee."
+  - id: C-IMPERS-01
+    category: impersonation
+    pattern: '\b(bank (of )?\w+|customer (support|service)|security team|account team|tax (department|authority)|courier|post office|dhl|fedex|paypal|amazon|apple support|microsoft support)\b'
+    contribution: 0.10
+    technical: "Reference to an organisation commonly impersonated in scams (weak signal on its own)."
+    plain: "The message claims to come from a well-known organisation. Check it really did."
+  - id: C-INSTR-01
+    category: suspicious_instruction
+    pattern: '\b(click (the |this )?(link|button)|open (the |this )?(attachment|link)|download (the |this )?(file|app|attachment)|do not (tell|share|inform)|keep this (secret|confidential)|install (the |this )?app)\b'
+    contribution: 0.20
+    technical: "Instruction to click, download or keep secret detected."
+    plain: "The message tells you to click a link, open a file, or keep it secret."
