@@ -25,6 +25,7 @@ class RiskEngine:
         data = yaml.safe_load(weights_path.read_text(encoding="utf-8"))
         self.version: str = data["version"]
         self.weights: dict[str, float] = data["weights"]
+        self.external_floor: int = int(data.get("external_malicious_floor", 75))
 
     def score(self, evidence: list[EvidenceItem], evaluated: set[SignalFamily],
               weights: dict[str, float] | None = None) -> tuple[int, list[FamilyScore]]:

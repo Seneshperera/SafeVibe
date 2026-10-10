@@ -7,3 +7,7 @@ weights:
   domain: 0.10
   conversation: 0.10
   image: 0.05
+
+# If an external threat-intel service flags the URL as malicious, the final score is raised
+# to at least this value (a confirmed external hit is stronger than any heuristic mix).
+external_malicious_floor: 75
