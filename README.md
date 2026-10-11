@@ -20,3 +20,11 @@ pytest
 - `backend/app/risk` weighted scoring (weights_v1.yaml)
 - `backend/rules` versioned rule files
 - `docs/traceability.md` SRS -> code -> test
+
+## Run the frontend
+```bash
+cd frontend
+npm install
+cp .env.example .env      # set VITE_API_URL if the backend is not on localhost:8000
+npm run dev               # http://localhost:5173
+```

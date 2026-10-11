@@ -28,7 +28,11 @@ def canonicalize_url(raw: str) -> str:
     s = raw.strip()
     if not re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*://", s):
         s = "http://" + s
-    parts = urlsplit(s)
+    try:
+        parts = urlsplit(s)
+        parts.port  # raises ValueError on a malformed port
+    except ValueError:
+        raise ValueError("This does not look like a valid web address.")
     if parts.scheme.lower() not in ("http", "https"):
         raise ValueError("Only http and https URLs are supported")
     host = parts.hostname
